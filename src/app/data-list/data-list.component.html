@@ -1,0 +1,12 @@
+<div>
+  <ul class="data-list">
+    <li *ngFor="let series of dataArray">
+      {{series.seriesName}}
+      <ul>
+        <li *ngFor="let item of series.seriesData">
+          {{item.year}} | {{item.value}}
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
