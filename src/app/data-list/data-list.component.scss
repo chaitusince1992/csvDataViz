@@ -1,0 +1,13 @@
+:host {
+    display: block;
+}
+
+.data-list {
+    list-style: none;
+    &>li {
+        display: inline-block;
+    }
+    ul {
+        margin-right: 20px;        
+    }
+}
