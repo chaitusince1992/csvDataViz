@@ -1,0 +1,14 @@
+
+:host::ng-deep {
+    .line {
+        stroke: black;
+        fill: none;
+    }
+}
+
+.chart-container {
+    display: inline-block;
+    margin-bottom: 50px;
+    /* width: 50%;
+    height: 400px; */
+}

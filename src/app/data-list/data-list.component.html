@@ -1,12 +1,17 @@
 <div>
   <ul class="data-list">
-    <li *ngFor="let series of dataArray">
-      {{series.seriesName}}
-      <ul>
-        <li *ngFor="let item of series.seriesData">
-          {{item.year}} | {{item.value}}
-        </li>
-      </ul>
+    <li *ngFor="let series of dataArray" class="data-each">
+      <h4 style="text-align:center;">{{series.seriesName}}</h4>
+      <div class="table">
+          <div class="table-row">
+            <div class="table-cell head">Year</div>
+            <div class="table-cell head">Value</div>
+          </div>
+          <div class="table-row" *ngFor="let item of series.seriesData">
+            <div class="table-cell">{{item.year}}</div>
+            <div class="table-cell">{{item.value}}</div>
+          </div>
+      </div>
     </li>
   </ul>
 </div>

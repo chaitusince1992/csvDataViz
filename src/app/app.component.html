@@ -1,8 +1,15 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-    Welcome to {{ title }}!
+    CSV Data Parsing and Visualization..!
   </h1>
 </div>
-<input type="file" (change)="fileUploadChange($event)" accept=".csv" />
+<b for="file-upload">Upload CSV Data file: </b>
+<input type="file" (change)="fileUploadChange($event)" accept=".csv" id="file-upload" />
 <app-data-list [dataArray]="csvData"></app-data-list>
+<div *ngFor="let series of csvData" class="chart-container">
+  <h2 style="text-align:center;">{{series.seriesName}}</h2>
+  <app-line-chart [series]="series.seriesData" [seriesName]="series.seriesName"></app-line-chart>
+</div>
+<!-- <app-line-chart [dataArray]="csvData"></app-line-chart> -->
+<!-- <svg width="900" height="500"></svg> -->

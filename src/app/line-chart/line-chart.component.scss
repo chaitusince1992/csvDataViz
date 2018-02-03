@@ -1,0 +1,13 @@
+:host {
+    display: block;
+}
+:host::ng-deep {
+    .line {
+        stroke: black;
+        fill: none;
+    }
+}
+/* svg {
+    width: 100%;
+    height: 100%;
+} */

@@ -4,10 +4,38 @@
 
 .data-list {
     list-style: none;
+    margin-bottom: 50px;
     &>li {
         display: inline-block;
+        min-width: 25%;        
+        text-align: center;
     }
     ul {
         margin-right: 20px;        
     }
+}
+
+.table {
+    display: table;
+    border: 1px solid rgb(63, 63, 63);
+    border-left: 0;
+    border-top: 0;
+    margin: auto;
+}
+
+.table-row {
+    display: table-row;
+}
+
+.table-cell {
+    &.head {
+        font-weight: bold;
+    }
+    min-width: 100px;
+    display: table-cell;
+    border: 1px solid rgb(63, 63, 63);
+    border-right: 0;
+    border-bottom: 0;
+    text-align: center;
+    padding: 5px;
 }
