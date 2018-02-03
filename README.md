@@ -1,6 +1,13 @@
-# CsvParseFission
+# CSV Data Parsing and Visualization
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.5.
+
+
+# Project Link
+https://csvparseviz.herokuapp.com/
+
+Upload series.csv available in this repository to test the app.
+
 
 ## Development server
 
