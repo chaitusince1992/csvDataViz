@@ -21,7 +21,13 @@ export class AppComponent {
     year,
     value
   }];
+  sortedArray: [{
+    year,
+    value
+  }];
   @Output() csvData;
+  colors = ["#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6", "#dd4477", "#66aa00", "#b82e2e", "#316395", "#994499", "#22aa99", "#aaaa11", "#6633cc", "#e67300", "#8b0707", "#651067", "#329262", "#5574a6", "#3b3eac"];
+
   // csvReader:FileReader = new FileReader(); 
 
   fileUploadChange = function (e) {
@@ -38,7 +44,9 @@ export class AppComponent {
       this.initSvg();
       this.initAxis();
       this.drawAxis();
-      this.drawLine();
+      this.csvData.forEach((d, i) => {        
+        this.drawLine(d, i);
+      });
     });
   }
 
@@ -68,12 +76,33 @@ export class AppComponent {
   }
 
   private initAxis() {
+    console.log(this.csvData);
+    let maxArray = [];
+    this.csvData.forEach(function(res){
+      let maxVal = d3Array.max(res.seriesData.map(function(d){return d.value}));
+      // console.log(maxVal);
+      maxArray.push(maxVal);
+    })
     this.x = d3Scale.scaleTime().range([0, this.width]);
     this.y = d3Scale.scaleLinear().range([this.height, 0]);
     this.x.domain(d3Array.extent(this.firstData, (d) => new Date(d.year)));
-    let maxYAxis = d3Array.max(this.firstData.map(function(d){return d.value}));
+
+    let maxYAxis = d3Array.max(maxArray.map(function(d){return d}));
+    console.log(maxYAxis);
+    // d3Array.max(this.firstData.map(function(d){return d.value}));
     this.y.domain([0, maxYAxis]);
   }
+
+ /*  
+  private initAxis2() {
+    this.x = d3Scale.scaleTime().range([0, this.width]);
+    this.y = d3Scale.scaleLinear().range([this.height, 0]);
+    console.log(this.csvData);
+    this.x.domain(d3Array.extent(this.firstData, (d) => new Date(d.year)));
+    let maxYAxis = d3Array.max(this.firstData.map(function(d){return d.value}));
+    this.y.domain([0, maxYAxis]);
+  } */
+  
 
   private drawAxis() {
 
@@ -94,14 +123,18 @@ export class AppComponent {
       .text("Price ($)");
   }
 
-  private drawLine() {
+  private drawLine(series, ind) {
+    this.sortedArray = series.seriesData.sort((x,y)=>d3Array.ascending(x.year, y.year));
+    
     this.line = d3Shape.line()
       .x((d: any) => this.x(new Date(d.year)))
-      .y((d: any) => this.y(d.value));
+      .y((d: any) => this.y(d.value))
+      .curve(d3Shape.curveMonotoneX);
 
     this.svg.append("path")
-      .datum(this.firstData)
+      .datum(this.sortedArray)
       .attr("class", "line")
+      .attr("stroke",this.colors[ind])
       .attr("d", this.line);
   }
 

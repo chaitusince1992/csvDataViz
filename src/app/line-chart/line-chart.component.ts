@@ -14,6 +14,7 @@ import * as d3Axis from 'd3-axis';
 export class LineChartComponent implements AfterViewInit {
 
   @Input() series;
+  @Input() dataArray;
   @Input() seriesName;
   sortedArray: [{
     year,
@@ -25,12 +26,13 @@ export class LineChartComponent implements AfterViewInit {
    }
 
   ngAfterViewInit() {
-    console.log(this.series, this.seriesName);
-
-    this.initSvg();
-    this.initAxis();
-    this.drawAxis();
-    this.drawLine();
+    console.log(this.series, this.seriesName, this.dataArray);
+    if(this.series) {
+      this.initSvg();
+      this.initAxis();
+      this.drawAxis();
+      this.drawLine();
+    }
   }
   private margin = { top: 20, right: 20, bottom: 30, left: 50 };
   private width: number;
